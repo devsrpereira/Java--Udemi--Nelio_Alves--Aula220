@@ -16,16 +16,14 @@ public class Program {
         List<Product> productList = new ArrayList<>();
 
         System.out.println();
+        System.out.println("Input file:");
 
         try(BufferedReader br = new BufferedReader(new FileReader(path))){
             String line = br.readLine();
 
             while (line != null){
                 String[] vect = line.split(", ");
-
-                System.out.println("Input file:");
                 System.out.println(line);
-
                 line = br.readLine();
 
                 String name = vect[0];
@@ -43,17 +41,16 @@ public class Program {
 
         File strPath = new File(path);
         boolean newFolder = new File(strPath.getParent() + "\\out").mkdir();
-        boolean newFile = new File(strPath.getParent() + "\\out\\summary.csv").createNewFile();
         String fileAdress = strPath.getParent() + "\\out\\summary.csv";
 
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter(fileAdress, true))){
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(fileAdress))){
 
             System.out.println();
             System.out.println("Output file (/out/summary.cvs):");
 
             for (Product product : productList) {
-                bw.write(product.getName() + ", " + String.format("%.2f",product.totalPrice(product.getPrice(), product.getUnity())));
-                System.out.println(product.getName() + ", " + String.format("%.2f",product.totalPrice(product.getPrice(), product.getUnity())));
+                bw.write(product.getName() + "," + String.format("%.2f",product.totalPrice()));
+                System.out.println(product.getName() + "," + String.format("%.2f",product.totalPrice()));
                 bw.newLine();
              }
         }

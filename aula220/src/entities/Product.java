@@ -35,7 +35,7 @@ public class Product {
     }
 
 
-    public double totalPrice(double price, int unity){
+    public double totalPrice(){
         return price * unity;
     }
 
